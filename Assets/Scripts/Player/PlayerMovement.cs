@@ -2,24 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private int _amountOfJumps;
     [SerializeField] private float _radius;
     [SerializeField] private ContactFilter2D _filter;
 
     private PlayerInput _input;
+    private Animator _animator;
+    private Rigidbody2D _rigidbody;
+    private SpriteRenderer _sprite;
+    private readonly Collider2D[] _results = new Collider2D[1];
     private float _direction;
     private int _jumpsLeft;
-    private readonly Collider2D[] _results = new Collider2D[1];
 
     private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
         _input = new PlayerInput();
         _input.Enable();
@@ -39,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float normalizedSpeed = direction * _speed * Time.deltaTime;
         transform.Translate(new Vector3(normalizedSpeed, 0, 0));
+        _animator.SetInteger("Run", (int)direction);
     }
 
     private void MoveDirection(float direction)
@@ -59,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumpsLeft--;
         _rigidbody.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
+        _animator.SetTrigger("Jump");
     }
 
     private void IsGrounded()
