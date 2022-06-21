@@ -56,9 +56,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         _jumpsLeft--;
-        _rigidbody.velocity = Vector2.zero;
         _rigidbody.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
-
     }
 
     private void IsGrounded()
@@ -66,6 +64,9 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, _rayDistance);
 
         if (hit.collider != null)
+        {
+            Debug.Log(hit.collider.name);
             _jumpsLeft = _amountOfJumps - 1;
+        }
     }
 }
