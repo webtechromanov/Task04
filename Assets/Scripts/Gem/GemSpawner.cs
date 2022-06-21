@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GemInstantiate : MonoBehaviour
+public class GemSpawner : MonoBehaviour
 {
     [SerializeField] private Gem _gem;
     [SerializeField] private Vector3[] _spawnPositions;

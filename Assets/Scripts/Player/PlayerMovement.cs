@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumpsLeft--;
         _rigidbody.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
-        _animator.SetTrigger("Jump");
+        _animator.SetTrigger(AnimatorPlayerController.Params.Jump);
     }
 
     private void IsGrounded()
