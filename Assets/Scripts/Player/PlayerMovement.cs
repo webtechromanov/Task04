@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private readonly Collider2D[] _results = new Collider2D[1];
     private float _direction;
     private int _jumpsLeft;
+    
 
     private void Awake()
     {
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float normalizedSpeed = direction * _speed * Time.deltaTime;
         transform.Translate(new Vector3(normalizedSpeed, 0, 0));
-        _animator.SetInteger("Run", (int)direction);
+        _animator.SetInteger(AnimatorPlayerController.Params.Run, (int)direction);
     }
 
     private void MoveDirection(float direction)

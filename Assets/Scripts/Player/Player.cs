@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         StopCoroutine(_dying);
     }
 
-    public void ApplyDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _health -= damage;
         _animator.SetTrigger(AnimatorPlayerController.Params.Hurt);
