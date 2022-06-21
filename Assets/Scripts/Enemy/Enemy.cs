@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
         if (collision.TryGetComponent(out Player player))
         {
             player.ApplyDamage(_damage);
-            Debug.Log(_damage);
         }
     }
 }

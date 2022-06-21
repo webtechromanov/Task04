@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public void ApplyDamage(int damage)
     {
         _health -= damage;
-        Debug.Log("Hello");
         _animator.SetTrigger("Hurt");
     }
 }
