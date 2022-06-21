@@ -9,11 +9,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private int _amountOfJumps;
-    [SerializeField] private float _rayDistance;
+    [SerializeField] private float _radius;
+    [SerializeField] private ContactFilter2D _filter;
 
     private PlayerInput _input;
     private float _direction;
     private int _jumpsLeft;
+    private readonly Collider2D[] _results = new Collider2D[1];
 
     private void Awake()
     {
@@ -61,12 +63,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, _rayDistance);
+        var hit = Physics2D.OverlapCircle(transform.position, _radius, _filter, _results);
 
-        if (hit.collider != null)
-        {
-            Debug.Log(hit.collider.name);
+        if (hit != 0)
             _jumpsLeft = _amountOfJumps - 1;
-        }
     }
 }
